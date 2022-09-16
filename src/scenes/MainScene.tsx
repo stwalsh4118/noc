@@ -71,9 +71,6 @@ function Player() {
 
 		camera.position.set(ref.current.position.x, ref.current.position.y, ref.current.position.z);
 		ref.current.rotation.setFromVector3(new Vector3(camera.rotation.x, camera.rotation.y, camera.rotation.z));
-		// mesh.current.getWorldPosition(mesh.current.position);
-		// console.log(mesh.current.rotation.x, mesh.current.rotation.y, mesh.current.rotation.z);
-		// console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
 	});
 
 	return (
