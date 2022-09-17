@@ -1,5 +1,6 @@
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { sceneContext, sceneDispatchContext } from "../../App";
 
 function Box({ position }) {
 	// This reference gives us direct access to the THREE.Mesh object
@@ -14,7 +15,16 @@ function Box({ position }) {
 	});
 	// Return the view, these are regular Threejs elements expressed in JSX
 	return (
-		<mesh position={position} ref={mesh} scale={clicked ? 1.5 : 1} onClick={(event) => click(!clicked)} onPointerOver={(event) => hover(true)} onPointerOut={(event) => hover(false)}>
+		<mesh
+			position={position}
+			ref={mesh}
+			scale={clicked ? 1.5 : 1}
+			onClick={() => {
+				click(!clicked);
+			}}
+			onPointerOver={(event) => hover(true)}
+			onPointerOut={(event) => hover(false)}
+		>
 			<boxGeometry args={[1, 1, 1]} />
 			<meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
 		</mesh>
