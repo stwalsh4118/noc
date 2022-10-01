@@ -1,18 +1,24 @@
 import React, { useContext } from "react";
 import { sceneContext } from "../../App";
+import BaseScene from "../../scenes/BaseScene";
 
-import MainScene from "../../scenes/MainScene";
 import RandomWalkerScene from "../../scenes/INTRODUCTION/RandomWalkerScene";
+import VectorBallBounce1e1 from "../../scenes/VECTORS/VectorBallBounce1e1";
 
 const scenes = {
-	MainScene: MainScene,
 	RandomWalkerScene: RandomWalkerScene,
+	VectorBallBounce1e1: VectorBallBounce1e1,
 };
 
 function SceneManager() {
 	const scene = useContext(sceneContext);
 
-	return React.createElement(scenes[scene]);
+	//CREATE SCENE FROM NAME THATS IN SCENE CONTEXT
+	return (
+		<>
+			<BaseScene>{React.createElement(scenes[scene])}</BaseScene>
+		</>
+	);
 }
 
 export default SceneManager;

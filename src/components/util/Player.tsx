@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { PointerLockControls, FirstPersonControls, Sky } from "@react-three/drei";
-import { Physics, usePlane, useSphere } from "@react-three/cannon";
 import { Vector3 } from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 
@@ -66,7 +65,7 @@ function Player({ postion }) {
 		ref.current.translateX(-direction.x);
 		ref.current.translateZ(-direction.z);
 		if (ref.current.position.y < 1) {
-			ref.current.position.y = 1;
+			// ref.current.position.y = 1;
 		}
 		// console.log(mesh.current.position);
 
