@@ -5,12 +5,13 @@ export const sceneContext = createContext("MainScene");
 export const sceneDispatchContext = createContext((scene: string) => {});
 
 function App({ children }) {
-	const [scene, setScene] = useState("RandomWalkerScene");
+	const [scene, setScene] = useState("VectorBallBounce1e1");
 
 	useEffect(() => {
 		console.log("scene in context", scene);
 	}, [scene]);
 	return (
+		// CONTEXT PROVIDERS
 		<>
 			<sceneContext.Provider value={scene}>
 				<sceneDispatchContext.Provider value={setScene}>{children}</sceneDispatchContext.Provider>

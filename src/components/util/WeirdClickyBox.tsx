@@ -1,6 +1,5 @@
 import { useFrame } from "@react-three/fiber";
 import { useContext, useRef, useState } from "react";
-import { sceneContext, sceneDispatchContext } from "../../App";
 
 function Box({ position }) {
 	// This reference gives us direct access to the THREE.Mesh object
