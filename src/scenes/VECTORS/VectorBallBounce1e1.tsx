@@ -4,8 +4,9 @@ import { BoxGeometry, Vector3 } from "three";
 import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import Sphere, { SphereProps } from "../../components/util/Sphere";
+import { usePlayerPosition } from "../../globals";
 
-interface SphereEncloseureProps {
+export interface SphereEncloseureProps {
 	boxSize: Vector3;
 	boxPosition: Vector3;
 }
@@ -17,7 +18,7 @@ interface BouncingSphereProps {
 	SphereEnclosure?: SphereEncloseureProps;
 }
 
-function SphereEnclosure({ boxSize, boxPosition }: SphereEncloseureProps) {
+export function SphereEnclosure({ boxSize, boxPosition }: SphereEncloseureProps) {
 	return (
 		<>
 			<lineSegments position={[boxPosition.x, boxPosition.y, boxPosition.z]}>
@@ -40,6 +41,8 @@ function BouncingSphere({ radius, position, velocity, SphereEnclosure = { boxSiz
 		if (!document.hasFocus()) {
 			return;
 		}
+
+		const playerPosition = usePlayerPosition.getState().playerPosition;
 
 		mesh.current.position.x += velocity.x * delta;
 		mesh.current.position.y += velocity.y * delta;

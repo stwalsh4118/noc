@@ -1,5 +1,6 @@
 import { Vector3 } from "three";
-import React from "react";
+import React, { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 
 export interface SphereProps {
 	radius: number;
@@ -9,9 +10,21 @@ export interface SphereProps {
 }
 
 function Sphere({ radius, position, color }: SphereProps) {
+	const mesh = useRef(null);
+
+	useFrame((state, delta) => {
+		if (!document.hasFocus()) {
+			return;
+		}
+
+		mesh.current.position.x = position.x;
+		mesh.current.position.y = position.y;
+		mesh.current.position.z = position.z;
+	});
+
 	return (
 		<>
-			<mesh position={[position.x, position.y, position.z]}>
+			<mesh ref={mesh} position={[position.x, position.y, position.z]}>
 				<sphereGeometry args={[radius, 32, 32]}></sphereGeometry>
 				<meshStandardMaterial color={color}></meshStandardMaterial>
 			</mesh>

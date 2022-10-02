@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { PointerLockControls, FirstPersonControls, Sky } from "@react-three/drei";
 import { Vector3 } from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { usePlayerPosition } from "../../globals";
 
 const usePersonControls = () => {
 	const keys = {
@@ -68,6 +69,8 @@ function Player({ postion }) {
 			// ref.current.position.y = 1;
 		}
 		// console.log(mesh.current.position);
+
+		usePlayerPosition.setState({ playerPosition: new Vector3(ref.current.position.x, ref.current.position.y, ref.current.position.z) });
 
 		camera.position.set(ref.current.position.x, ref.current.position.y, ref.current.position.z);
 		ref.current.rotation.setFromVector3(new Vector3(camera.rotation.x, camera.rotation.y, camera.rotation.z));

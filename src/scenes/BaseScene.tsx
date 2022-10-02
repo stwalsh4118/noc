@@ -3,6 +3,21 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { PointerLockControls, Sky } from "@react-three/drei";
 import { Vector3 } from "three";
 import Player from "../components/util/Player";
+import StatsImpl from "stats.js";
+
+function Stats() {
+	const [stats] = useState(() => new StatsImpl());
+	useEffect(() => {
+		stats.showPanel(0);
+		document.body.appendChild(stats.dom);
+		return () => document.body.removeChild(stats.dom);
+	}, []);
+	return useFrame((state) => {
+		stats.begin();
+		state.gl.render(state.scene, state.camera);
+		stats.end();
+	}, 1);
+}
 
 function BaseScene({ children }) {
 	return (
@@ -15,6 +30,7 @@ function BaseScene({ children }) {
 					<Player postion={new Vector3(0, 10, 0)}></Player>
 					<Sky distance={4500000} turbidity={1} rayleigh={1} sunPosition={[1000, 100, 0]} inclination={45} azimuth={0.75} />
 					{children}
+					<Stats />
 				</Canvas>
 			</div>
 		</>
