@@ -16,10 +16,6 @@ function RandomWalker({ position, stepTime, walkType = "uniform" }) {
 	const [placeholders, setPlaceholders] = useState([]);
 	const { camera } = useThree();
 
-	useEffect(() => {
-		camera.rotation.set(-1.6, 0, 0);
-	}, []);
-
 	useFrame((state, delta) => {
 		setElapsedTime((prev) => prev + delta);
 
