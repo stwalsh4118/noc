@@ -14,3 +14,7 @@ export const usePlayerPosition = create(() => ({
 export const useMenuStatus = create(() => ({
 	inMenu: false,
 }));
+
+export const useCollisionObjects = create(() => ({
+	collisionObjects: [],
+}));

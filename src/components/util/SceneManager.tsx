@@ -5,15 +5,17 @@ import BaseScene from "../../scenes/BaseScene";
 import RandomWalkerScene from "../../scenes/INTRODUCTION/RandomWalkerScene";
 import AccelerateBallsTowardsPlayer1e2 from "../../scenes/VECTORS/AccelerateBallsTowardsPlayer1e2";
 import VectorBallBounce1e1 from "../../scenes/VECTORS/VectorBallBounce1e1";
-import Sandbox from "../../scenes/THE ENVIORNMENT PROJECT/Sandbox";
+import Sandbox from "../../scenes/THE ENVIRONNMENT PROJECT/Sandbox";
 import ReactDropdown from "react-dropdown";
 import { useMenuStatus } from "../../globals";
+import TEST from "../../scenes/TEST";
 
 const scenes = {
 	RandomWalkerScene: RandomWalkerScene,
 	VectorBallBounce1e1: VectorBallBounce1e1,
 	AccelerateBallsTowardsPlayer1e2: AccelerateBallsTowardsPlayer1e2,
 	Sandbox: Sandbox,
+	TEST: TEST,
 };
 
 function SceneManager() {

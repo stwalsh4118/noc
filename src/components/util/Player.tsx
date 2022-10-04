@@ -3,6 +3,7 @@ import { PointerLockControls, FirstPersonControls, Sky } from "@react-three/drei
 import { Vector3 } from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { usePlayerPosition } from "../../globals";
+import GroundCollisionDetector from "./GroundCollisionDetector";
 
 const usePersonControls = () => {
 	const keys = {
@@ -42,7 +43,7 @@ const usePersonControls = () => {
 	return movement;
 };
 
-function Player({ postion }) {
+function Player({ postion }, useCollisions?: boolean) {
 	const { camera } = useThree();
 	const { forward, backward, left, right, up, down } = usePersonControls();
 	const ref = useRef(null);
@@ -91,6 +92,7 @@ function Player({ postion }) {
 			<mesh ref={ref} position={postion}>
 				<sphereGeometry args={[0]}></sphereGeometry>
 			</mesh>
+			<GroundCollisionDetector objectRef={ref}></GroundCollisionDetector>
 		</>
 	);
 }
