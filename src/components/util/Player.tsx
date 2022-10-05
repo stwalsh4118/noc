@@ -3,7 +3,7 @@ import { PointerLockControls, FirstPersonControls, Sky } from "@react-three/drei
 import { Vector3 } from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { usePlayerPosition } from "../../globals";
-import GroundCollisionDetector from "./GroundCollisionDetector";
+import checkCollision from "../../lib/checkCollision";
 
 const usePersonControls = () => {
 	const keys = {
@@ -70,12 +70,27 @@ function Player({ postion }, useCollisions?: boolean) {
 		}
 
 		ref.current.position.y = currentYPos;
-
+		let newY = ref.current.position.y;
 		if (up) {
-			ref.current.position.y += SPEED * delta;
+			newY += SPEED * delta;
 		}
 		if (down) {
-			ref.current.position.y -= SPEED * delta;
+			newY -= SPEED * delta;
+		}
+
+		if (useCollisions) {
+			const collision = checkCollision(ref.current.position);
+			if (!collision) {
+				ref.current.position.y = newY;
+			} else {
+				if (newY < collision.point.y + 1) {
+					ref.current.position.y = collision.point.y + 1;
+				} else {
+					ref.current.position.y = newY;
+				}
+			}
+		} else {
+			ref.current.position.y = newY;
 		}
 
 		usePlayerPosition.setState({
@@ -92,7 +107,6 @@ function Player({ postion }, useCollisions?: boolean) {
 			<mesh ref={ref} position={postion}>
 				<sphereGeometry args={[0]}></sphereGeometry>
 			</mesh>
-			<GroundCollisionDetector objectRef={ref}></GroundCollisionDetector>
 		</>
 	);
 }
