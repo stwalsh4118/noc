@@ -9,6 +9,7 @@ import Sandbox from "../../scenes/THE ENVIRONNMENT PROJECT/Sandbox";
 import ReactDropdown from "react-dropdown";
 import { useMenuStatus } from "../../globals";
 import TEST from "../../scenes/TEST";
+import HeliumBalloon2e1 from "../../scenes/FORCES/HeliumBalloon2e1";
 
 const scenes = {
 	RandomWalkerScene: RandomWalkerScene,
@@ -16,6 +17,7 @@ const scenes = {
 	AccelerateBallsTowardsPlayer1e2: AccelerateBallsTowardsPlayer1e2,
 	Sandbox: Sandbox,
 	TEST: TEST,
+	HeliumBalloon2e1: HeliumBalloon2e1,
 };
 
 function SceneManager() {

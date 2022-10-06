@@ -6,7 +6,7 @@ export const sceneContext = createContext("MainScene");
 export const sceneDispatchContext = createContext((scene: string) => {});
 
 function App({ children }) {
-	const [scene, setScene] = useState("Sandbox");
+	const [scene, setScene] = useState("HeliumBalloon2e1");
 
 	useEffect(() => {
 		console.log("scene in context", scene);

@@ -5,12 +5,7 @@ import { degToRad } from "three/src/math/MathUtils";
 import Plane from "../../components/util/Plane";
 import Sphere from "../../components/util/Sphere";
 import checkCollision from "../../lib/checkCollision";
-
-interface IMovementProps {
-	position: Vector3;
-	velocity: Vector3;
-	acceleration: Vector3;
-}
+import { IMovementProps } from "../../models";
 
 // Organism
 // Behavior:

@@ -17,10 +17,10 @@
 		"alea": "^1.0.1",
 		"animejs": "^3.2.1",
 		"normal-distribution": "^1.1.1",
+		"open-simplex-noise": "^2.5.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-dropdown": "^1.11.0",
-		"simplex-noise": "^4.0.0",
 		"stats-js": "^1.0.1",
 		"three": "^0.144.0",
 		"zustand": "^4.1.1"
