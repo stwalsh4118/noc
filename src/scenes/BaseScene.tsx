@@ -28,7 +28,7 @@ function BaseScene({ children }) {
 		<>
 			<div className="w-screen h-screen">
 				<Canvas className="w-full h-full bg-slate-400">
-					<Physics gravity={new Vector3(0, -9.81, 0).toArray()}>
+					<Physics gravity={new Vector3(0, 0, 0).toArray()}>
 						<Debug color="black" scale={1.01}>
 							<ambientLight />
 							<pointLight position={[10, 10, 10]} />
@@ -57,7 +57,7 @@ function BaseScene({ children }) {
 									);
 								}}
 							/>
-							<Player postion={new Vector3(0, 10, 0)}></Player>
+							<Player position={new Vector3(0, 10, 0)}></Player>
 							<Sky
 								distance={4500000}
 								turbidity={1}

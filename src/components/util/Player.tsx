@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { PointerLockControls, FirstPersonControls, Sky } from "@react-three/drei";
-import { Vector3 } from "three";
+import { BufferGeometry, Euler, Mesh, Vector3 } from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { usePlayerPosition } from "../../globals";
 import checkCollision from "../../lib/checkCollision";
+import { useSphere } from "@react-three/cannon";
+import { Position } from "@react-three/drei/helpers/Position";
 
 const usePersonControls = () => {
 	const keys = {
@@ -43,21 +45,34 @@ const usePersonControls = () => {
 	return movement;
 };
 
-function Player({ postion }, useCollisions?: boolean) {
+function Player({ position }, useCollisions?: boolean) {
 	const { camera } = useThree();
 	const { forward, backward, left, right, up, down } = usePersonControls();
-	const ref = useRef(null);
+	const [ref, api] = useSphere(() => ({ position: position.toArray(), args: [0] }));
 
 	const SPEED = 15;
+
+	useEffect(() => {
+		api.position.subscribe((pos) => {
+			usePlayerPosition.setState({
+				playerPosition: new Vector3(pos[0], pos[1], pos[2]),
+			});
+		});
+	}, []);
 
 	useFrame((state, delta) => {
 		camera.position.set(ref.current.position.x, ref.current.position.y, ref.current.position.z);
 		ref.current.rotation.setFromQuaternion(camera.quaternion);
 
+		const direction = new Vector3();
+		camera.getWorldDirection(direction);
+
+		const xzDirection = new Vector3(direction.x, 0, direction.z).normalize();
+
 		const currentYPos = ref.current.position.y;
 
 		if (forward) {
-			ref.current.translateZ(-SPEED * delta);
+			ref.current.position.add(xzDirection.multiplyScalar(SPEED * delta));
 		}
 		if (backward) {
 			ref.current.translateZ(SPEED * delta);
@@ -93,19 +108,13 @@ function Player({ postion }, useCollisions?: boolean) {
 			ref.current.position.y = newY;
 		}
 
-		usePlayerPosition.setState({
-			playerPosition: new Vector3(
-				ref.current.position.x,
-				ref.current.position.y,
-				ref.current.position.z
-			),
-		});
+		api.position.set(ref.current.position.x, ref.current.position.y, ref.current.position.z);
 	});
 
 	return (
 		<>
-			<mesh ref={ref} position={postion}>
-				<sphereGeometry args={[0]}></sphereGeometry>
+			<mesh ref={ref as React.RefObject<Mesh<BufferGeometry>>}>
+				<sphereGeometry args={[0.1]}></sphereGeometry>
 			</mesh>
 		</>
 	);
